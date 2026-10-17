@@ -1,0 +1,4 @@
+interface:
+  display_name: "China Policy Risk"
+  short_description: "Assess Chinese policy and macro-financial risks for ordinary residents."
+  default_prompt: "Use $china-policy-risk-analysis to analyze this Chinese policy or macro-financial situation, including official-data sub-item checks, bias/water ranges, cross-validation, hidden constraints, seven pressure valves, transmission chains, unfinished-policy risk, supporting policies, final risk bearers, and cautious ordinary-resident risk controls."

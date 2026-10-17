@@ -1,0 +1,7 @@
+interface:
+  display_name: "Agent Evaluation"
+  short_description: "Score agents with metrics, gates, and preference traces."
+  default_prompt: "Use $agent-evaluation to build a weighted evaluation framework for this agent task."
+
+policy:
+  allow_implicit_invocation: true

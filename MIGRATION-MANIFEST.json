@@ -1,0 +1,545 @@
+{
+  "migration_time_utc": "2026-10-17T15:16:39.449226+00:00",
+  "owner": "222222222l",
+  "visibility": "public",
+  "snapshot_only": true,
+  "sources": [
+    {
+      "name": "market-signal-analysis-skill",
+      "sha": "bd07ba5f41c717073e523a2be55b967c21a6b02f",
+      "branch": "main",
+      "url": "https://github.com/222222222l/market-signal-analysis-skill",
+      "stars": 0,
+      "visibility": "public",
+      "migrated_at_utc": "2026-10-17T15:16:39.449226+00:00",
+      "skill_entry": "SKILL.md",
+      "file_count": 30
+    },
+    {
+      "name": "China-policy-analysis-skill",
+      "sha": "436d2c325bc3eba13788f45627fa277f96922e6f",
+      "branch": "main",
+      "url": "https://github.com/222222222l/China-policy-analysis-skill",
+      "stars": 0,
+      "visibility": "public",
+      "migrated_at_utc": "2026-10-17T15:16:39.449226+00:00",
+      "skill_entry": "SKILL.md",
+      "file_count": 5
+    },
+    {
+      "name": "Agent-Evaluation-Skill",
+      "sha": "53948d49f5c994fe750ad324d16157f5d4d238d6",
+      "branch": "main",
+      "url": "https://github.com/222222222l/Agent-Evaluation-Skill",
+      "stars": 0,
+      "visibility": "public",
+      "migrated_at_utc": "2026-10-17T15:16:39.449226+00:00",
+      "skill_entry": "agent-evaluation/SKILL.md",
+      "file_count": 11
+    },
+    {
+      "name": "AI-infra-optimize-skill",
+      "sha": "f2c7804c91ff1b08b77d4fe0bef4e7288ffdf41c",
+      "branch": "main",
+      "url": "https://github.com/222222222l/AI-infra-optimize-skill",
+      "stars": 0,
+      "visibility": "public",
+      "migrated_at_utc": "2026-10-17T15:16:39.449226+00:00",
+      "skill_entry": "optimize-ai-infra/SKILL.md",
+      "file_count": 10
+    },
+    {
+      "name": "sync-project-state-skill",
+      "sha": "405dc5c7fd6829fa18ad9e7de4c87215a8016252",
+      "branch": "main",
+      "url": "https://github.com/222222222l/sync-project-state-skill",
+      "stars": 0,
+      "visibility": "public",
+      "migrated_at_utc": "2026-10-17T15:16:39.449226+00:00",
+      "skill_entry": "SKILL.md",
+      "file_count": 6
+    },
+    {
+      "name": "model-causes-and-decisions-skill",
+      "sha": "0d123e500849d3cb3296da512e410908e2064e0b",
+      "branch": "main",
+      "url": "https://github.com/222222222l/model-causes-and-decisions-skill",
+      "stars": 0,
+      "visibility": "public",
+      "migrated_at_utc": "2026-10-17T15:16:39.449226+00:00",
+      "skill_entry": "model-causes-and-decisions/SKILL.md",
+      "file_count": 5
+    }
+  ],
+  "files": [
+    {
+      "path": "market-signal-analysis-skill/.gitattributes",
+      "mode": "100644",
+      "git_blob_sha": "8826b8b4aa8a76568ee4ae12696a7658a1b1a76f",
+      "sha256": "dbcfaf8f5234393bdb2ac036c15cbe76db6305c3abbf90ed8db860f89e24abc6",
+      "bytes": 91
+    },
+    {
+      "path": "market-signal-analysis-skill/README.md",
+      "mode": "100644",
+      "git_blob_sha": "351e69ef9791325480d27e8b254f3ffb3123e3ff",
+      "sha256": "bf4f35955fc8a6b6613c8532eda7f0fa0fd0b872bd8cc332f0be996fd3daffbd",
+      "bytes": 7540
+    },
+    {
+      "path": "market-signal-analysis-skill/SKILL.md",
+      "mode": "100644",
+      "git_blob_sha": "40d98af0dc5d51bfc38ea56fb6a8bc790060cc62",
+      "sha256": "5225fe662804b67485023018ba10523358ca2212d440735b57e5325aaaadeb77",
+      "bytes": 11749
+    },
+    {
+      "path": "market-signal-analysis-skill/agents/openai.yaml",
+      "mode": "100644",
+      "git_blob_sha": "0dd33b640b627fdd2d7d13dc6628945576875ee6",
+      "sha256": "8751ec7604e053cea6d4009feaa419d422ccf56f457bd40ac6ada4ca184c88d3",
+      "bytes": 416
+    },
+    {
+      "path": "market-signal-analysis-skill/references/a-share-broad-etf-monitoring.md",
+      "mode": "100644",
+      "git_blob_sha": "129fdbc78c2bbb8ab8e94a8178fbf8d5e397fcc7",
+      "sha256": "cbc4896ac897296e1fc161b26e427f633d60bb1241c57c627d7b40ada8ad8a6d",
+      "bytes": 7142
+    },
+    {
+      "path": "market-signal-analysis-skill/references/a-share-macro-trading-model.md",
+      "mode": "100644",
+      "git_blob_sha": "61c6f8b3d2fa930720e17d1bad6ca99628d75617",
+      "sha256": "1efe8d6e8da2ec435670d6458ab426ab9104bbe14c2fd648be7df4186724deb5",
+      "bytes": 11432
+    },
+    {
+      "path": "market-signal-analysis-skill/references/a-share-sector-etf-crowding.md",
+      "mode": "100644",
+      "git_blob_sha": "f6368b1209f62c8eb9958f21b1ba0e5d12cba8fc",
+      "sha256": "d0d15c62e326d5cdcc87e3f91212565d0a6a5a2bf63acf960785ac655d8b0a07",
+      "bytes": 6471
+    },
+    {
+      "path": "market-signal-analysis-skill/references/actor-optimal-path-analysis.md",
+      "mode": "100644",
+      "git_blob_sha": "118cd9a488fb7ba6cc611bd820e2023a9ea8f635",
+      "sha256": "2c6eca4656e3614de61375283a1e156391949065fe3c2505ae5721bd87dad686",
+      "bytes": 13484
+    },
+    {
+      "path": "market-signal-analysis-skill/references/behavior-mode-selection.md",
+      "mode": "100644",
+      "git_blob_sha": "5410e18ca962ff2e0eddfc55f5a25477f07af3f3",
+      "sha256": "3f3ed5b93e4849d2c1dfd2ea9378b97bab887a0193d97c017baecabadf3731b2",
+      "bytes": 18122
+    },
+    {
+      "path": "market-signal-analysis-skill/references/cycle-overlay-analysis.md",
+      "mode": "100644",
+      "git_blob_sha": "86dfdcfff4ec6b833241c511a3a9daefa1f41f1b",
+      "sha256": "e91c75606ce958a97bf393fc8d054dedd02a8e996db61f2df58e96a42c74a9df",
+      "bytes": 14595
+    },
+    {
+      "path": "market-signal-analysis-skill/references/deep-learning-extension.md",
+      "mode": "100644",
+      "git_blob_sha": "1ac1600a06eea99bfe9eade1ce6219fff4677bc9",
+      "sha256": "e2b17a60c9a8ff674fc9233312fffc71efa5bc0f85b29a9551b18a5e162d55b5",
+      "bytes": 6492
+    },
+    {
+      "path": "market-signal-analysis-skill/references/fourier-cycle-analysis.md",
+      "mode": "100644",
+      "git_blob_sha": "1f654d02837cce93d750ba0e83089ca766991bfa",
+      "sha256": "c39ca06f7e6308570d18461c46df0d38df007475e1689d5f26e165139a7effd2",
+      "bytes": 16453
+    },
+    {
+      "path": "market-signal-analysis-skill/references/hong-kong-etf-flow-monitoring.md",
+      "mode": "100644",
+      "git_blob_sha": "e0220da612611000115e953636e9ff98b502f6c1",
+      "sha256": "a83e7c2c30d08da85cb97b04c03dfcd921fc88090f031d5e0935ab97e7296726",
+      "bytes": 11425
+    },
+    {
+      "path": "market-signal-analysis-skill/references/macro-stress-derivative-analysis.md",
+      "mode": "100644",
+      "git_blob_sha": "87d83fcf4bf730683dc9a5ebb69ccd76fe07f73b",
+      "sha256": "a6aba434c4e9be6d81599bdf04c488315ee8f09df965349090bc752056a21133",
+      "bytes": 8403
+    },
+    {
+      "path": "market-signal-analysis-skill/references/market-profiles.md",
+      "mode": "100644",
+      "git_blob_sha": "89aba0e1441b923caba9c19e31ec48ec4de7847f",
+      "sha256": "78342418fcf81e33cc8cc1cfe425cbee14847cf607abb3af63fdc72dd5b98221",
+      "bytes": 2902
+    },
+    {
+      "path": "market-signal-analysis-skill/references/official-data-verification.md",
+      "mode": "100644",
+      "git_blob_sha": "e8114d85f62cf1705d565d1e9445e660179d9bac",
+      "sha256": "f760f4e3e7268b930a60435560cc4446025212e798f8f8089b515143d868dc91",
+      "bytes": 8223
+    },
+    {
+      "path": "market-signal-analysis-skill/references/output-format.md",
+      "mode": "100644",
+      "git_blob_sha": "208a67aaf1b50a452775c099b69bc366f83485a4",
+      "sha256": "bdf94def6873331008171c1a63f18a8f716a71d31d651bba95e4bfb0332853ed",
+      "bytes": 5039
+    },
+    {
+      "path": "market-signal-analysis-skill/references/research-and-optimization-roadmap.md",
+      "mode": "100644",
+      "git_blob_sha": "9253d721686a153787893ea0e8aa7537c32ccc52",
+      "sha256": "d233909e816beb5c341ee572aa11085c29bde83984f0a466dec8f4cf6372c61a",
+      "bytes": 15269
+    },
+    {
+      "path": "market-signal-analysis-skill/references/sector-bubble-analysis.md",
+      "mode": "100644",
+      "git_blob_sha": "0b4a1046ae13e4527c624cb4120e1a254e5b96a9",
+      "sha256": "6791e91c8d3771031f8f33dfd4257fe739bbcc7fe389762799961f6a28798424",
+      "bytes": 7957
+    },
+    {
+      "path": "market-signal-analysis-skill/references/signal-taxonomy.md",
+      "mode": "100644",
+      "git_blob_sha": "acaa5ff0132fc467529b92c819050170631d4872",
+      "sha256": "ba38c4c6fd6954b0df476e9aa053c712217a79bcc84b63757b233cea30883a0b",
+      "bytes": 4758
+    },
+    {
+      "path": "market-signal-analysis-skill/references/single-stock-fundamental-technical-analysis.md",
+      "mode": "100644",
+      "git_blob_sha": "8e427777a79ef9c011dc04e068a9f54ce77ebaac",
+      "sha256": "e18830aaf65fe9df2b8eb146a345b892ff96368d6db825dd71943e1bad6dd7fd",
+      "bytes": 11699
+    },
+    {
+      "path": "market-signal-analysis-skill/references/special-date-event-risk.md",
+      "mode": "100644",
+      "git_blob_sha": "30b33f81987490b96ba7b9796cb18646e04aec58",
+      "sha256": "327f8c8c4a474616fcaf66362f0d806a51aae30e96ba82fffbe777e8ac967106",
+      "bytes": 6728
+    },
+    {
+      "path": "market-signal-analysis-skill/references/statistical-weighting.md",
+      "mode": "100644",
+      "git_blob_sha": "e4aaa6c07ff9f1fa8a01d372e74d67f03b5b1189",
+      "sha256": "91f7d7b074a1bd4c4e88b73ba9f28986b862a5b10355e892ce97e465553640a3",
+      "bytes": 9613
+    },
+    {
+      "path": "market-signal-analysis-skill/references/trend-stage-analysis.md",
+      "mode": "100644",
+      "git_blob_sha": "b608a143686079870743d8bc6a4636c9c4fecb2d",
+      "sha256": "c7bace1778f13a0a75e79929672f931763a21795a74128f14b11b0d63ee14980",
+      "bytes": 16389
+    },
+    {
+      "path": "market-signal-analysis-skill/references/us-macro-liquidity-fed-policy.md",
+      "mode": "100644",
+      "git_blob_sha": "3934fe9d8426a9f6a74693e2da7b85008568cc4d",
+      "sha256": "719d11845c86677e18240e4d74197ad4691e751d9327e6ebf6cc5cea0b985eb1",
+      "bytes": 25676
+    },
+    {
+      "path": "market-signal-analysis-skill/scripts/analyze_etf_flows.py",
+      "mode": "100644",
+      "git_blob_sha": "f9bf5956e67701a20547779e27153e6b68615c81",
+      "sha256": "f955a514215b9bb9a0f40469fac6cbc4c4d45679b8e2a21369c6962ab318db97",
+      "bytes": 35380
+    },
+    {
+      "path": "market-signal-analysis-skill/scripts/analyze_ohlcv.py",
+      "mode": "100644",
+      "git_blob_sha": "1574a779eea43f992f023ea54ea220e259c672bf",
+      "sha256": "f34f16a379bef94ff331176b77a5ffea7dcb9af37243e7970ddacbe78f140cb5",
+      "bytes": 33072
+    },
+    {
+      "path": "market-signal-analysis-skill/scripts/recommend_behavior_mode.py",
+      "mode": "100644",
+      "git_blob_sha": "f013de36de7ec91ad150d5f25764bb051857ac8c",
+      "sha256": "544a1d3ace03813ad2f2309e10af0744490eab3841e16593755e886f8e0e1e9b",
+      "bytes": 17630
+    },
+    {
+      "path": "market-signal-analysis-skill/scripts/train_market_transformer_demo.py",
+      "mode": "100644",
+      "git_blob_sha": "b8665a7b31c0c60204a5dd3ad42d378fbb678f0d",
+      "sha256": "f7268a63ed0c5f23bbf98b6d8da4cef9656cb1f49cfbdbb2f91b31df2dc4bb79",
+      "bytes": 19190
+    },
+    {
+      "path": "market-signal-analysis-skill/scripts/validate_skill_graph.py",
+      "mode": "100644",
+      "git_blob_sha": "cf76a2dc038494ffe5b570587d0501bf76f14db8",
+      "sha256": "3bfe47c14a679876b0fcb7ea5bce00592ff44cdee82702daecb8e7ded3258ea8",
+      "bytes": 3786
+    },
+    {
+      "path": "China-policy-analysis-skill/README.md",
+      "mode": "100644",
+      "git_blob_sha": "3546b684f58373f12ee2fbcbb02b79e4fc6d948f",
+      "sha256": "1d2a2ba1e601011916c5e40ef49d2cc227d3faefac010a32698b8ac058976376",
+      "bytes": 4377
+    },
+    {
+      "path": "China-policy-analysis-skill/SKILL.md",
+      "mode": "100644",
+      "git_blob_sha": "2394ed0c39f1df17d34f4d3a2e1a31cfabc1616d",
+      "sha256": "cd9623bd65c9218be4407e600a7ec32151a59b7da9036e91675143414f67e34b",
+      "bytes": 16127
+    },
+    {
+      "path": "China-policy-analysis-skill/agents/openai.yaml",
+      "mode": "100644",
+      "git_blob_sha": "a585957057d49a999360c8570b2ce50055794b0f",
+      "sha256": "7eb9d1cc967d23afc5b7439578bbdd2a25d237ece9cb4c32da71003d1dd3544e",
+      "bytes": 508
+    },
+    {
+      "path": "China-policy-analysis-skill/references/china-macro-financial-pressure-valves.md",
+      "mode": "100644",
+      "git_blob_sha": "19b2cf58f75bb397fc05a8362416297e111a8190",
+      "sha256": "7716ef2bf22deef631a092f583ad87ad6ec981ceda68b43168b199bf83294e14",
+      "bytes": 15069
+    },
+    {
+      "path": "China-policy-analysis-skill/references/official-data-consistency-check.md",
+      "mode": "100644",
+      "git_blob_sha": "22033c779c2a410e0e33f97d7518fcb809b6b547",
+      "sha256": "a930b2393511abed0c278a0de53d6b47e626c5b033b27518047d9562c5d401a6",
+      "bytes": 7783
+    },
+    {
+      "path": "Agent-Evaluation-Skill/.gitignore",
+      "mode": "100644",
+      "git_blob_sha": "a10900526b57d6a7bf0e0ddd51cc0363b13a7a2f",
+      "sha256": "d7527775015abcf3f9f0d8313d192663102e0f367be3bb82ef7de4c2071c4444",
+      "bytes": 119
+    },
+    {
+      "path": "Agent-Evaluation-Skill/README.md",
+      "mode": "100644",
+      "git_blob_sha": "c4dbcf2bb5be4774796d2e52c974e738968630ba",
+      "sha256": "abda0d742e20d6e357cc55f569c6f86558e467135026c22ea3bfff46155400f1",
+      "bytes": 4571
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/SKILL.md",
+      "mode": "100644",
+      "git_blob_sha": "04be856b6c108363097eee41e5a9733ab4c7ab34",
+      "sha256": "8ade91706c53bf52f869734eea71c79c2b65e34135105ab0ff90321e4a35c403",
+      "bytes": 3769
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/agents/openai.yaml",
+      "mode": "100644",
+      "git_blob_sha": "2cb29f06da73978a7fe355516a0a6ef1da348348",
+      "sha256": "ad0b6d927e01ebbfbf0a6bb693b89b46fac133873f7a42082c484e00b5c628de",
+      "bytes": 273
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/references/human-preference.md",
+      "mode": "100644",
+      "git_blob_sha": "c538cdeb96f5ee3b1ff7fb50b992bf975ebf2bb4",
+      "sha256": "d09d9eeb4168c9184dfdf0d2fa2cc10dae67422286edc287cebc169f91f5d4d7",
+      "bytes": 1665
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/references/metric-taxonomy.md",
+      "mode": "100644",
+      "git_blob_sha": "44fae07c1feb8729389f8ff122d79c0b3e1bba15",
+      "sha256": "7305572fdcb8fe98a39b001a86817465868dd8c618a1ff1e001835c9b0fc1983",
+      "bytes": 3715
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/references/run-record-schema.md",
+      "mode": "100644",
+      "git_blob_sha": "4c93d529f2771a2d16459cb7c945e9fb638f6f12",
+      "sha256": "b38d101251e930b7d130aeb915fb1726d327e79c966c23b7eabeac674907bcad",
+      "bytes": 1756
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/references/task-suite-design.md",
+      "mode": "100644",
+      "git_blob_sha": "cb6e32f5282f4f77db4a7557b184089bc5e8c7f2",
+      "sha256": "cfb7c8b3a577de8b600a94f6e761e7250270b4bd8181a943fe1a1b7f2d04b738",
+      "bytes": 2573
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/scripts/record_human_score.py",
+      "mode": "100644",
+      "git_blob_sha": "d374ad63a7aa8bea0e6a70cb8afbfb1895088c2b",
+      "sha256": "341447e0364c55eaa7769cfca52892fcd3cb78509a6e8993529e7ad01d400ac6",
+      "bytes": 4741
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/scripts/score_runs.py",
+      "mode": "100644",
+      "git_blob_sha": "61fe9af2f368a83e00838bafd45107d4e769b09e",
+      "sha256": "bf3646e22da1282912922d547ceec2015dc3eff59738c2cee4d8825f199c51ce",
+      "bytes": 23050
+    },
+    {
+      "path": "Agent-Evaluation-Skill/agent-evaluation/scripts/validate_skill.py",
+      "mode": "100644",
+      "git_blob_sha": "4b51df1b49913cad240aa4df2e74a23a38e50f74",
+      "sha256": "3a7b733fd761a58a397d765c06f9bc6e8761035f253480989f4ee6bbd024e7f6",
+      "bytes": 3458
+    },
+    {
+      "path": "AI-infra-optimize-skill/README.md",
+      "mode": "100644",
+      "git_blob_sha": "d36b6a14e13e6f45f499647c667690e87a96d22f",
+      "sha256": "c123b85ed18aac0514471bed08dcc031616ec283aaef91664ff63b1c60e9cb90",
+      "bytes": 5982
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/SKILL.md",
+      "mode": "100644",
+      "git_blob_sha": "28d68a8207928fc9ee11365816cd9059b95c9468",
+      "sha256": "106c0d096fa4e78a1d9cd0c6c8bf3b042e0f7b6e19dfc24b038b022720c48aad",
+      "bytes": 12065
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/agents/openai.yaml",
+      "mode": "100644",
+      "git_blob_sha": "9946a247827639381f191ab831187c5f6c7baa2c",
+      "sha256": "ece32631ed5d82da371d6c017f41cf0c0bfaf1beb75eb1fbdfa3936299b88b67",
+      "bytes": 301
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/references/agent-execution-contract.md",
+      "mode": "100644",
+      "git_blob_sha": "37fec9ce7c79839825b1d633a69b92254400ae19",
+      "sha256": "b6e4920a9f6af38f5b3653fa87482a20f14f93332fd0fa5d02b230599720e209",
+      "bytes": 6953
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/references/diagnostic-framework.md",
+      "mode": "100644",
+      "git_blob_sha": "ef9f89607b416ff1b086f6507d070c0bfd0df3c4",
+      "sha256": "04499873810499ab481c810b198efc3669a784f56ea5b2f8abd164c9aa59d455",
+      "bytes": 9053
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/references/expert-guidance.md",
+      "mode": "100644",
+      "git_blob_sha": "d958c0ed2bac0958195a2f3959541f5f146d0dd1",
+      "sha256": "a505e08e917624976528cc31f1efb19d4aeef9f095026c81bbcfbac8c366d09f",
+      "bytes": 7463
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/references/novice-guidance.md",
+      "mode": "100644",
+      "git_blob_sha": "7eef7bb8ad7aaf265190d256cf94211f63f1d2c1",
+      "sha256": "eb96d297da7a8416ad99407e719459e9b77edf0d0a652ea865d3c66c4605ec77",
+      "bytes": 5747
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/references/profiling-playbooks.md",
+      "mode": "100644",
+      "git_blob_sha": "e56cafffbfeaafd6dedf586d97412d7a9b772b16",
+      "sha256": "42d410f79091a4b1320a43a527ae8226fe0c306c223d211a933ad162e1da68ed",
+      "bytes": 5145
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/scripts/estimate_impact.py",
+      "mode": "100644",
+      "git_blob_sha": "f104b3582366146a1a391758547a6740b144217c",
+      "sha256": "a02f00ca7536e03d9d60515f4c427bbb20473dfe72ab2326a4cbd409969a3fcd",
+      "bytes": 2808
+    },
+    {
+      "path": "AI-infra-optimize-skill/optimize-ai-infra/scripts/validate_skill.py",
+      "mode": "100644",
+      "git_blob_sha": "9fa8eedd66a281af8d859023703cae8426f0d164",
+      "sha256": "769997333892090b69417362cd3cac36a5e573cd67686676eebd58323439305b",
+      "bytes": 5273
+    },
+    {
+      "path": "sync-project-state-skill/.gitignore",
+      "mode": "100644",
+      "git_blob_sha": "75c61823b87164dde85ad0f2c78c300e011cc8a2",
+      "sha256": "6f4ff2992c4e2558837e2e09c39ed2bba140658755b22d046aab810ea2c90ca0",
+      "bytes": 34
+    },
+    {
+      "path": "sync-project-state-skill/SKILL.md",
+      "mode": "100644",
+      "git_blob_sha": "6cb790ca0c322388604f10213d8c7b50a0c12e29",
+      "sha256": "9e1fc2918fa5ea916af8ef5a96b55022765f73e3bf2bb559f9ec9000917291a2",
+      "bytes": 4515
+    },
+    {
+      "path": "sync-project-state-skill/agents/openai.yaml",
+      "mode": "100644",
+      "git_blob_sha": "93a00875dfd4a0db9a9f6c1d8994a18ef0b66e1d",
+      "sha256": "1279f194a95f9e6d131975978c0e683d322f4e108c95f5e371a2587217d3fbeb",
+      "bytes": 268
+    },
+    {
+      "path": "sync-project-state-skill/references/state-contract.md",
+      "mode": "100644",
+      "git_blob_sha": "d06788d75dfc2f10209411a3793f44e00232ece0",
+      "sha256": "010e4ee873555b95081763a13d5eee16264470632a280039fb72e2a1c3434d22",
+      "bytes": 2232
+    },
+    {
+      "path": "sync-project-state-skill/scripts/project_memory.py",
+      "mode": "100644",
+      "git_blob_sha": "49d2918603f6476a8b4d693ff819962f062f9368",
+      "sha256": "4032e586c49d3e202e707ff909a63c6afd0d68878b8cddb0cdcc97f8c5579470",
+      "bytes": 38310
+    },
+    {
+      "path": "sync-project-state-skill/scripts/test_project_memory.py",
+      "mode": "100644",
+      "git_blob_sha": "cdf11a92459d0252c0cd6002e63b8badf7e547b6",
+      "sha256": "edfb74dd99e312f5321549ab3124591fe21e913d9bf4acec2cd18cb7d65ea7f2",
+      "bytes": 5368
+    },
+    {
+      "path": "model-causes-and-decisions-skill/.gitattributes",
+      "mode": "100644",
+      "git_blob_sha": "36ac93b916f9d6a25bae49ea4fd80082ec575e3c",
+      "sha256": "7740676ec45ab4c87d732b834edcbe86200640fecaa297665abdd3a06f84f3be",
+      "bytes": 36
+    },
+    {
+      "path": "model-causes-and-decisions-skill/model-causes-and-decisions/SKILL.md",
+      "mode": "100644",
+      "git_blob_sha": "f2c13e4ed2fcb6844ea95dc4a67f3bebf8aaf046",
+      "sha256": "16227460130f550d5c2a037c1fa0448c2d254d51379fb3063361ae4f378ecd0d",
+      "bytes": 9548
+    },
+    {
+      "path": "model-causes-and-decisions-skill/model-causes-and-decisions/agents/openai.yaml",
+      "mode": "100644",
+      "git_blob_sha": "5d1ef84c071d16ae72e20cd1ca9daf711961a875",
+      "sha256": "6e22ca88551d68f64db699f9d820188088735dd8802131278cca69dc2ee70440",
+      "bytes": 294
+    },
+    {
+      "path": "model-causes-and-decisions-skill/model-causes-and-decisions/references/evaluation-cases.md",
+      "mode": "100644",
+      "git_blob_sha": "f1b70fe0b137f049fd4647fbe96b512d9b10d09f",
+      "sha256": "4952166cdf3bfda9423b04a19b5f7c8caf3f7cc74343b8a8aa6b632e1fcd171a",
+      "bytes": 8520
+    },
+    {
+      "path": "model-causes-and-decisions-skill/model-causes-and-decisions/references/methods.md",
+      "mode": "100644",
+      "git_blob_sha": "1a5d430dec3863f306b3b902518e9a9eb32ff00d",
+      "sha256": "5d76fe31255018e156321a9cfc078568044224b47d0ad961c340eb318f32d72a",
+      "bytes": 10296
+    }
+  ]
+}

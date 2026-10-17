@@ -1,0 +1,7 @@
+interface:
+  display_name: "Model Causes and Decisions"
+  short_description: "Recommend or apply causal modeling methods"
+  default_prompt: "Use $model-causes-and-decisions to turn this phenomenon into a falsifiable model, judgment, and action plan."
+
+policy:
+  allow_implicit_invocation: true

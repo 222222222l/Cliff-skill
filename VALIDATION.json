@@ -1,0 +1,10 @@
+{
+  "verified_at_utc": "2026-10-17T15:15:48.930412+00:00",
+  "files": 67,
+  "relative_links_checked": 8,
+  "missing_relative_links": [],
+  "sensitive_candidate_paths": [],
+  "source_blob_verification": "all match",
+  "nested_git": false,
+  "imported_code_executed": false
+}

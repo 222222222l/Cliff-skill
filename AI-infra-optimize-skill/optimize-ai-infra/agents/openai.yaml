@@ -1,0 +1,7 @@
+interface:
+  display_name: "AI 训练与推理性能诊断"
+  short_description: "Proactively diagnose AI performance bottlenecks"
+  default_prompt: "Use $optimize-ai-infra to diagnose my AI workload bottleneck and propose a measured optimization strategy."
+
+policy:
+  allow_implicit_invocation: true

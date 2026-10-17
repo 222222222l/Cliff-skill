@@ -1,0 +1,4 @@
+interface:
+  display_name: "Market Signal Analysis"
+  short_description: "Causal market regimes, trends, flows, cycles, and risk."
+  default_prompt: "Use $market-signal-analysis to analyze this market question with current data, the minimum sufficient modules, causal evidence, calibrated probabilities, scenarios, and explicit invalidation; add behavior-mode selection only when requested and supported by priors."
