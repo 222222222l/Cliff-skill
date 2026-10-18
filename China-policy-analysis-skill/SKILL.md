@@ -9,9 +9,10 @@ description: Analyze Chinese government policies beyond official narratives, esp
 
 Analyze Chinese policy from the ordinary resident's risk perspective, not from the official policy-document perspective. Treat official statements as public narrative and evidence, not as sufficient explanation.
 
-Use the following political-economy hypotheses as a starting frame unless the
-user states another. Test them against implementation evidence and plausible
-alternative explanations; they are not established facts about every policy:
+Treat the following as one candidate political-economy hierarchy, not a fixed
+ranking that determines every case. Test it against competing fiscal,
+developmental, implementation-capacity, and security explanations before
+drawing conclusions about policy motives:
 
 1. Regime continuity is the top objective; other interests can be sacrificed when perceived as necessary.
 2. Social stability is protected under that top objective.
@@ -62,6 +63,31 @@ Use the seven pressure valves as a connected system, not as separate topics:
 
 For each valve, classify level, first derivative, second derivative, policy tools being used, pressure-transfer direction, final risk bearers, unfinished-policy risk, and ordinary-resident impact. Do not infer systemic collapse from one stressed valve alone; look for pressure acceleration and cross-valve contagion.
 
+## Causal Identification and Macro–Micro Coherence
+
+For analyses of reform motivation, political constraints, central-local
+implementation, policy conflict, or macro-to-household transmission, read
+`references/political-economy-causal-engine.md`.
+
+Treat the political-economy hierarchy in `Core Stance` as a set of contestable
+hypotheses rather than a universally established ranking. Test at least three
+competing explanations when hidden intentions are material: political/security
+constraints, fiscal/financial constraints, principal-agent/implementation
+capacity, and/or development/welfare trade-offs.
+
+Always link: objective and authority → funding or enforcement → institutions'
+choices → industry balance sheets and prices → household cash flow, risk and
+exit rights → macro feedback. Identify counterevidence, one differentiating
+prediction and a condition under which the preferred explanation would fail.
+
+For official data, preserve publication versions and flag delayed, withdrawn,
+or methodology-changed releases—especially after deterioration—without treating
+them as automatic proof of manipulation.
+
+Use heuristic scores and first/second derivatives as descriptive monitoring,
+not calibrated default or crisis probabilities. When recommending household
+actions, weigh the opportunity cost of excessive caution alongside tail risks.
+
 ## Analysis Workflow
 
 Scale coverage to the question. For narrow requests, analyze only the mechanisms,
@@ -86,14 +112,24 @@ Extract the stated goals, then translate them:
 - "Investor protection" can mean confidence management; verify whether compensation, disclosure, litigation, delisting, and enforcement mechanisms exist.
 - "Pilot" can mean controlled experimentation, selective privilege, or a future national rollout.
 
-### 3. Apply the Political-Economy Hierarchy
+### 3. Test Competing Political-Economy Constraints
 
-Ask in order:
+Examine these constraints in parallel, without a predetermined ranking:
 
-- What threat to regime continuity, fiscal capacity, social order, food/energy/financial security, capital control, or elite cohesion is the policy managing?
-- What stability problem is being postponed, suppressed, or refinanced?
-- Which politically connected institutions gain funding, protection, market share, or exit rights?
-- What residual channel remains for ordinary residents, and what risk is attached to that channel?
+- Political/security: what evidence shows constraints involving regime continuity, social order, food/energy/financial security, capital control, or elite cohesion?
+- Fiscal/resources: what budget, debt-service, funding, staffing, or balance-sheet limits bind the decision?
+- Principal-agent/implementation: how do authority, information, incentives, coordination, or local capacity affect execution?
+- Development/welfare: what productivity, employment, public-service, distributional, or long-term welfare trade-offs could explain the choice?
+
+When hidden intentions are material, select at least three distinct competing
+explanations with differentiating predictions; these four categories are
+candidates, not a checklist to fill mechanically. Compare supporting evidence,
+counterevidence, feasible alternatives, and a falsification condition for each.
+Do not assume political security is every policy's sole objective. If evidence
+cannot distinguish the explanations, leave the motive unidentified.
+
+Trace which institutions and residents gain funding, protection, market share,
+or exit rights and who bears risk. Do not equate these outcomes with intent.
 
 ### 4. Map Winners, Losers, and Risk Bearers
 
