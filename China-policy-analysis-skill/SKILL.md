@@ -112,14 +112,24 @@ Extract the stated goals, then translate them:
 - "Investor protection" can mean confidence management; verify whether compensation, disclosure, litigation, delisting, and enforcement mechanisms exist.
 - "Pilot" can mean controlled experimentation, selective privilege, or a future national rollout.
 
-### 3. Apply the Political-Economy Hierarchy
+### 3. Test Competing Political-Economy Constraints
 
-Ask in order:
+Examine these constraints in parallel, without a predetermined ranking:
 
-- What threat to regime continuity, fiscal capacity, social order, food/energy/financial security, capital control, or elite cohesion is the policy managing?
-- What stability problem is being postponed, suppressed, or refinanced?
-- Which politically connected institutions gain funding, protection, market share, or exit rights?
-- What residual channel remains for ordinary residents, and what risk is attached to that channel?
+- Political/security: what evidence shows constraints involving regime continuity, social order, food/energy/financial security, capital control, or elite cohesion?
+- Fiscal/resources: what budget, debt-service, funding, staffing, or balance-sheet limits bind the decision?
+- Principal-agent/implementation: how do authority, information, incentives, coordination, or local capacity affect execution?
+- Development/welfare: what productivity, employment, public-service, distributional, or long-term welfare trade-offs could explain the choice?
+
+When hidden intentions are material, select at least three distinct competing
+explanations with differentiating predictions; these four categories are
+candidates, not a checklist to fill mechanically. Compare supporting evidence,
+counterevidence, feasible alternatives, and a falsification condition for each.
+Do not assume political security is every policy's sole objective. If evidence
+cannot distinguish the explanations, leave the motive unidentified.
+
+Trace which institutions and residents gain funding, protection, market share,
+or exit rights and who bears risk. Do not equate these outcomes with intent.
 
 ### 4. Map Winners, Losers, and Risk Bearers
 

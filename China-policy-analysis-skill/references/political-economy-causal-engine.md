@@ -51,9 +51,9 @@ For the relevant decision-maker identify:
 
 Never collapse 'central government', 'local government', 'banks', 'SOEs', and 'party organs' into a single unified actor.
 
-## Stage B — Four competing hypotheses, mandatory
+## Stage B — At least three distinct competing explanations
 
-Use at least three genuinely different explanations when motive or reform willingness matters; default candidates:
+Use at least three distinct competing explanations with differentiating predictions when motive or reform willingness matters. The following four categories are candidates, not mandatory slots; select or adapt explanations to the policy and available evidence rather than mechanically filling all four:
 
 - `H-S`: Political/institutional-security constraint dominates **this decision**.
 - `H-F`: Fiscal or balance-sheet capacity binds the decision.
