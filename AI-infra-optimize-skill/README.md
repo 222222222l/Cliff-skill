@@ -6,7 +6,7 @@ The skill diagnoses end-to-end AI training, inference, and serving bottlenecks, 
 
 ## 适用场景
 
-- 训练 step、tokens/s 或多卡扩展效率低于预期；
+- 训练 step、有效 tokens/s、MFU 或多卡扩展效率低于预期；
 - 推理 TTFT、ITL/TPOT、p95/p99 或吞吐异常；
 - OOM、显存持续增长、KV cache pressure 或 allocator fragmentation；
 - GPU 利用率波动、GPU 时间线空洞、大量短 Kernel；
@@ -20,7 +20,7 @@ The skill diagnoses end-to-end AI training, inference, and serving bottlenecks, 
 2. **先系统，后 Kernel**：从 workload、service、host、runtime、graph、communication 和 memory 逐层下钻。
 3. **端到端收益优先**：使用 Amdahl 上界约束局部优化价值。
 4. **成熟方案优先**：优先验证现有编译器、运行时、Serving Engine 和融合库。
-5. **可验证、可回滚**：所有建议都需要基线、验收门槛、数值质量与停止条件。
+5. **可验证、可回滚**：所有建议都需要基线、验收门槛、数值质量与停止条件；MFU 必须声明有效 FLOPs、实际工作量及硬件峰值口径。
 6. **不越权实施**：执行请求只生成只读分析与执行计划，不自动修改代码、配置或服务。
 
 ## 受众与输出模式
@@ -121,13 +121,14 @@ AI-infra-optimize-skill/
     │   ├── novice-guidance.md
     │   ├── expert-guidance.md
     │   ├── agent-execution-contract.md
-    │   └── profiling-playbooks.md
+    │   ├── profiling-playbooks.md
+    │   └── training-mfu-playbook.md
     └── scripts/
         ├── estimate_impact.py
         └── validate_skill.py
 ```
 
-`SKILL.md` 只负责触发、路由和主流程；详细知识按受众与任务类型渐进加载。
+`SKILL.md` 只负责触发、路由和主流程；详细知识按受众与任务类型渐进加载。训练 MFU 专项流程见 `references/training-mfu-playbook.md`：覆盖真实有效 FLOPs 核算、预声明完整窗口、microbatch/GAS 搜索、冻结编码器与数据重叠、GC/多卡慢 rank、FP8 缓存以及失败优化的拒绝条件。
 
 ## 验证
 
