@@ -92,15 +92,20 @@ Record:
 ```text
 hardware and topology:
 framework/CUDA/library versions:
-model and precision:
-global/micro batch and accumulation:
-sequence or input shape distribution:
+model and precision, including frozen encoders:
+model-specific useful-FLOP formula, excluded work and executed dense peak source:
+completed images/tokens versus nominal batch:
+global useful-work target, micro token/batch and accumulation:
+sequence or input shape distribution and attention mask:
 compile/graph/checkpointing/distributed settings:
 warm-up units and measured units:
-step p50/p95:
-tokens or samples per second:
+predeclared continuous step window, repetitions and all slow-step/JIT/GC events:
+step p50/p95 and global/slowest-rank wall:
+actual useful tokens or completed samples per second, MFU and optional HFU:
 forward/backward/optimizer/data/communication/checkpoint breakdown:
-allocated/reserved/peak device memory:
+allocated/reserved/peak device memory and long-tail capacity headroom:
+GC pauses, redundant throughput timer synchronizations and external JIT/autotune buckets:
+checkpoint/resume, data receipts and optimizer/EMA step reconciliation:
 quality/loss baseline:
 ```
 
@@ -135,7 +140,11 @@ Run a concurrency sweep that includes underload, near-saturation, and overload o
 | transfer/sync overhead | remove or batch host reads/copies in a controlled branch | critical-path copies/syncs shrink |
 | memory capacity dominated by activations | sweep microbatch/checkpointing with same effective batch | peak allocated memory follows activation prediction |
 | KV cache dominates | sweep live tokens/concurrency | memory grows near predicted bytes per token |
-| communication bottleneck | compare 1/N-device and inspect overlap/per-rank trace | scaling loss aligns with collectives/imbalance |
+| communication bottleneck | compare 1/N-device and inspect overlap/per-rank trace | scaling loss aligns with actual transport rather than a slow peer's arrival |
+| MFU microbatch choice | hold global useful tokens/step fixed; sweep micro token budget × accumulation | unprofiled full-step throughput peaks before memory or shape costs overwhelm launch amortization |
+| frozen encoder/CPU pipeline | isolate compatible-shape batching, ready queue, asynchronous claim/read and bounded next-step prefetch | critical-path gaps or encoder spans shrink while consumption/replay and numerics remain valid |
+| GC or repeated timer sync | align GC callback, CUDA idle and peer collective timestamps; compare a reversible GC/timer policy in unprofiled repeats | end-to-end gain without leaks, lost synchronization, or changed math |
+| FP8 weight preparation | check per-micro re-quantization and native reuse across accumulation with exact scales/gradients oracle | full-step improvement with strict update-boundary invalidation |
 | one kernel is material | isolate equivalent microbenchmark plus selected counters | local share and headroom survive isolation |
 
 Use each result to update confidence; do not jump directly from a supporting result to implementation when a cheaper alternative remains untested.
