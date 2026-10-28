@@ -1,6 +1,6 @@
 ---
 name: optimize-ai-infra
-description: Diagnose end-to-end training, inference, and local AI service bottlenecks and prescribe evidence-based system optimization strategies. Use proactively when either a user reports slowness, latency, low throughput, OOM or abnormal VRAM, poor GPU utilization, scaling loss, or kernel concerns, or an agent itself observes these signals while autonomously training, fine-tuning, benchmarking, serving, deploying, or running inference—even when the user did not mention performance or invoke this skill. Cover host/data, launch/transfer, framework graph, memory/compute kernels, communication, scheduler/queue, KV cache, allocator, storage, numerical quality, mature open-source solutions, and justified Triton/TileLang/CUDA work. Route outputs for non-technical users, professional developers, and infra-capable AI agents, and separate advice from execution-plan-only requests.
+description: Diagnose end-to-end training, inference, and local AI service bottlenecks and prescribe evidence-based system optimization strategies. Use proactively when either a user reports slowness, latency, low throughput, OOM or abnormal VRAM, poor GPU utilization, low training MFU, scaling loss, or kernel concerns, or an agent itself observes these signals while autonomously training, fine-tuning, benchmarking, serving, deploying, or running inference—even when the user did not mention performance or invoke this skill. Cover host/data, launch/transfer, framework graph, memory/compute kernels, communication, scheduler/queue, KV cache, allocator, storage, numerical quality, mature open-source solutions, and justified Triton/TileLang/CUDA work. Route outputs for non-technical users, professional developers, and infra-capable AI agents, and separate advice from execution-plan-only requests.
 ---
 
 # Optimize AI Infra
@@ -75,6 +75,7 @@ Always read [diagnostic-framework.md](references/diagnostic-framework.md) before
 
 - For non-technical users, also read [novice-guidance.md](references/novice-guidance.md).
 - For professional developers or low-level optimization, also read [expert-guidance.md](references/expert-guidance.md).
+- For training MFU, useful-FLOP accounting, gradient-accumulation/batch search, or multi-rank training throughput, also read [training-mfu-playbook.md](references/training-mfu-playbook.md) before prescribing or changing settings.
 - For Infra Agent handoffs or execution-plan mode, also read [agent-execution-contract.md](references/agent-execution-contract.md).
 - When concrete profiling commands or evidence capture are needed, read [profiling-playbooks.md](references/profiling-playbooks.md).
 
@@ -84,7 +85,7 @@ Always read [diagnostic-framework.md](references/diagnostic-framework.md) before
 
 Translate “slow” or “uses too much memory” into one or more measurable objectives:
 
-- Training: step time, samples/s, tokens/s, time-to-train, scaling efficiency, peak allocated memory, or cost per trained token.
+- Training: step time, actual samples/s or useful tokens/s, training MFU with an explicit FLOP/peak convention, time-to-quality, scaling efficiency, peak allocated memory, or cost per trained token.
 - Offline inference: latency, tokens/s, peak memory, energy/cost per sample, or cold-start time.
 - Online service: request rate, queue time, TTFT, ITL/TPOT, p50/p95/p99 latency, output tokens/s, concurrency, error rate, or cost per request.
 
@@ -127,7 +128,7 @@ For each candidate, state:
 - cost and risk of the experiment;
 - plausible end-to-end impact.
 
-Prefer one-variable-at-a-time experiments. Distinguish cold start, warm steady state, throughput saturation, and tail latency.
+Prefer one-variable-at-a-time experiments. Distinguish cold start, warm steady state, throughput saturation, and tail latency. For MFU, compare only compatible model/data/precision/peak conventions, fix actual useful-work targets, predeclare complete consecutive windows, retain all slow steps, and use unprofiled full-pipeline wall time for performance claims.
 
 ### 5. Select the lowest sufficient optimization layer
 
@@ -192,3 +193,6 @@ For an explicit handoff or plan-only request, return analysis and the plan schem
 - Do not recommend CUDA/Triton merely because the workload uses a GPU.
 - Do not tune one favorable shape while ignoring the production distribution.
 - Do not list every possible optimization. Rank a small set by evidence and expected end-to-end value.
+- Do not use nominal batch, requested tokens, padded/dummy work, frozen-encoder FLOPs, or the wrong dense/sparse/precision peak to inflate training MFU.
+- Do not sum ranks' NCCL wait or CPU/CUDA scope durations as additive wall time; inspect straggler arrival skew and overlapping work.
+- Do not turn a local kernel or fresh-only short benchmark into a production MFU, long-run memory, convergence, or resume claim.
