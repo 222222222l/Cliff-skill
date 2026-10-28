@@ -37,14 +37,17 @@ Collect:
 - graph breaks, recompilation counts, accidental casts/copies/contiguous operations;
 - data-loader queue depth, worker utilization, host-to-device overlap.
 
+For training MFU, read [training-mfu-playbook.md](training-mfu-playbook.md) before configuration or kernel recommendations. Reconcile useful model FLOPs, executed precision peak, actual completed tokens/images and the slowest-rank full-step wall; distinct model/attention/token budgets form separate cohorts. Rank GC pauses, input/frozen-encoder work, redundant timer synchronizations, and rank arrival skew before assuming NCCL or compute kernels are inherently slow.
+
 Strategy candidates:
 
 - fix pipeline and synchronization before GPU kernels;
 - use fused framework paths, compilation, graph capture, and static shape buckets;
-- tune microbatch and accumulation for throughput without invalidating optimizer semantics;
+- sweep microbatch/useful-token budget and accumulation at fixed global useful work, accounting for variable actual samples, memory headroom, and optimizer semantics;
 - select DDP/FSDP/ZeRO/tensor or pipeline parallelism from capacity, topology, and communication evidence;
-- overlap collectives only after verifying correctness and the actual critical path;
+- overlap collectives only after verifying correctness and the actual critical path; first separate peer arrival skew from post-arrival transfer and optimizer matrix-workload imbalance;
 - treat checkpoint I/O and evaluation cadence as part of system throughput.
+- validate same-shape frozen-encoder batching, bounded CPU/metadata/VAE overlap, GC policy, and native FP8 weight-scale reuse with numerical, replay, and end-to-end gates; reject extra manual caches or custom fusions with no measured whole-step gain.
 
 ## Inference diagnosis
 

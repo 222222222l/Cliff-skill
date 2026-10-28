@@ -51,13 +51,15 @@ Optimization layers, from outside inward:
 
 Track at least:
 
-- data wait versus GPU-active time;
+- data wait versus GPU-active time, separating CPU queue wait from frozen GPU encoder and rank-sync waits;
 - forward, backward, optimizer, gradient synchronization, and checkpoint I/O;
-- tokens/s or samples/s and step-time distribution;
+- actual useful tokens/s or completed samples/s, step-time distribution, and any declared training-MFU numerator/peak convention;
 - achieved batch size and gradient accumulation;
 - activation, gradient, parameter, and optimizer-state memory;
 - compute/communication overlap and per-rank imbalance;
 - recompilations, graph breaks, dynamic shapes, and accidental synchronization.
+
+For an MFU investigation, use [training-mfu-playbook.md](training-mfu-playbook.md). Compute useful FLOPs from actual completed work and the model's attention/mask/precision semantics; use a global/slowest-rank continuous wall window, not nominal batch size or per-kernel elapsed sums. Retain compiler, GC, checkpoint and other slow steps inside preselected windows, and separate profiled traces from unprofiled throughput repeats.
 
 Common training hypotheses:
 
@@ -65,9 +67,11 @@ Common training hypotheses:
 |---|---|---|
 | periodic GPU idle gaps | data loader or checkpoint I/O | replace input with preloaded synthetic batch; disable checkpoint for a short controlled run |
 | backward dominates | expected math, unfused ops, recompute, or communication | split NVTX/profiler regions and inspect collective overlap |
-| multi-GPU scaling collapses | collectives, imbalance, small per-GPU work | compare 1/2/N-device efficiency and per-rank timelines |
+| multi-GPU scaling collapses | collectives, optimizer imbalance, small per-GPU work | compare 1/2/N-device efficiency; match collective sequences and split rank arrival skew from actual transfer tail |
 | memory grows each step | retained graph/tensors or cache growth | inspect live allocation history and object retention |
 | memory high but stable | model state, activations, workspace, or reserved pool | calculate theoretical state sizes and compare allocated/reserved |
+| MFU varies with microbatch/GAS | launch amortization, shape-dependent cost, activation memory or changed actual work | sweep at fixed global useful-work target; record actual tokens, peak memory and full-step wall |
+| long NCCL spans | slow rank, GC pause, optimizer imbalance or real transport | align CPU/CUDA traces; compare first/last collective arrival and last-arrival completion |
 
 ## 4. Inference-service decomposition
 
