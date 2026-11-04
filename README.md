@@ -1,29 +1,32 @@
-# Cliff-skill
+# Cliff Skills
 
-一组面向 AI 助手的实用 Skill，涵盖市场分析、政策风险研判、智能体评估、AI 性能优化、项目状态同步与因果决策建模。
+[English](README.en.md)
 
-## Skill 列表
+面向AI助手的分析与工程方法集合，包含市场/政策分析、Agent评估、性能诊断、项目状态同步和因果决策建模。各模块由指令、参考资料及部分确定性脚本组成；它们是方法与工具，不构成已验证的通用能力提升或预测收益。
 
-### [市场信号分析](market-signal-analysis-skill/)
+## 模块
 
-结合价格与成交量、基本面、流动性、ETF 份额变化、政策和周期等证据，分析股票、ETF、板块与指数。用于判断趋势阶段、识别风险，并比较不同市场状态下的行动选择及其成本和退出条件。
+| 模块 | 任务与入口 |
+| --- | --- |
+| [市场信号](market-signal-analysis-skill/README.md) | 数据核验、资金/估值、趋势和行动条件 |
+| [中国政策](China-policy-analysis-skill/README.md) | 执行约束、资金/风险传导、数据一致性和因果识别 |
+| [Agent评估](Agent-Evaluation-Skill/README.md) | 遥测、验收门槛、人工偏好与透明聚合 |
+| [AI性能诊断](AI-infra-optimize-skill/README.md) | 训练/推理关键路径、MFU口径和最小验证 |
+| [项目同步](sync-project-state-skill/README.md) | Git项目检查点、环境差异和跨设备交接 |
+| [因果与决策](model-causes-and-decisions-skill/README.md) | 反事实、识别、竞争解释和决策规则 |
 
-### [中国政策风险分析](China-policy-analysis-skill/)
+每个模块均提供中英文README。实际行为以其 `SKILL.md` 为准；按任务需要选用，不应把整个集合无差别注入每个会话。
 
-从普通居民的风险视角解读财政、货币、房地产、养老、产业和金融监管等政策。通过核对政策文本、执行行为与统计数据，分析利益分配、风险传导、配套措施缺口及对居民的影响。
+## 来源与版本
 
-### [智能体评估](Agent-Evaluation-Skill/)
+[MIGRATION-MANIFEST.json](MIGRATION-MANIFEST.json) 记录2026-10-17从同一维护者的独立仓库迁入的来源与提交。它是历史来源快照，文件哈希不是此后修改的实时校验清单；不要重写历史来源来掩盖版本变化。
 
-为垂直领域和任务型智能体建立可重复的评估框架。将精确量化指标、门槛检查和人工偏好评分分开记录，支持多轮任务测试、加权评分与失败模式分析，帮助判断智能体的实际表现。
+集合中的政策模块增加了 [因果扩展](China-policy-analysis-skill/docs/causal-extension-integration.md)，性能模块增加了 [训练MFU流程](AI-infra-optimize-skill/optimize-ai-infra/references/training-mfu-playbook.md)。因此集合版本不必与独立仓库逐字相同。当前状态应以Git提交和实际模块文件为准。
 
-### [AI 基础设施性能优化](AI-infra-optimize-skill/)
+## 使用与验证
 
-诊断模型训练、推理和本地 AI 服务中的延迟、吞吐量、显存与多卡扩展问题。沿数据、传输、计算、通信和调度链路定位瓶颈，以测量证据制定优化方案，并验证性能收益和质量影响。
+从模块README确认真正包含 `SKILL.md` 的目录，再安装至宿主支持的Skill位置。检查同名版本与本地修改，避免重复安装或覆盖。保持权限和项目约束。
 
-### [项目状态同步](sync-project-state-skill/)
+已有验证脚本检查各模块的结构、引用或计算行为；[VALIDATION.json](VALIDATION.json) 是既往记录，不是新提交已重新运行的证明。方法对真实任务的收益需要固定基线、代表性样本、独立验收、失败记录和成本统计。
 
-通过项目索引、不可变检查点和环境要求记录，支持 Git 项目跨电脑恢复、继续开发与交接。检查远端状态及 Skills、插件、MCP 和配置差异，明确报告无法恢复的环境条件，避免遗漏未提交或未推送的工作。
-
-### [因果与决策建模](model-causes-and-decisions-skill/)
-
-将模糊现象、归因问题、预测和行动选择转化为可检验的模型。明确系统结构、目标、反事实、竞争假设和不确定性，区分相关性、预测与因果效应，帮助比较方案并设定验证与更新条件。
+本仓库不含模型权重或统一Agent运行时，也没有为所有模块提供共享实验基准。当前未提供顶层 `LICENSE`；第三方引用和各模块来源应保留，不能仅凭公开托管推定统一再分发授权。
