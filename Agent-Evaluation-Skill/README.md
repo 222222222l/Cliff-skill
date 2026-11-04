@@ -1,186 +1,56 @@
-# Agent Evaluation Skill
+# Agent 评估 Skill
 
-`agent-evaluation` is a Codex skill for building repeatable evaluation frameworks for vertical-domain agents and task-specific agents.
+[English](README.en.md)
 
-It separates agent performance evaluation into three evidence layers:
+> 这是 Cliff-skill 集合中的模块副本。以下相对路径与命令均以 `Agent-Evaluation-Skill/` 为工作目录；历史来源见集合根目录的迁移清单。
 
-1. Exact quantitative metrics that can be counted or measured directly.
-2. Gate, threshold, boolean, and red/yellow/green metrics that can be judged by pass rate across repeated task runs.
-3. Human preference metrics that should expose traces and artifacts for manual scoring instead of pretending to be fully objective.
+`agent-evaluation` 用于设计和汇总垂直领域、任务型 Agent 的重复评估。它将直接测量的性能、验收门槛和人工偏好分开，保留任务与运行记录，再进行透明的聚合。
 
-The default final score is weighted but configurable:
+这是评估流程与评分工具，不是已经验证的通用 Agent 排行榜。任务集、评分权重和人工量表须针对使用场景校准。
 
-```text
-final_score =
-  0.35 * quantitative_score
-+ 0.45 * gate_pass_score
-+ 0.20 * human_preference_score
-```
+## 评估层次
 
-## Repository Layout
+| 层次 | 示例 | 解释边界 |
+| --- | --- | --- |
+| 定量遥测 | 成本、tokens、耗时、工具调用、重试 | 需要一致采集口径，缺失值不能当零 |
+| 验收门槛 | 真实完成、测试通过、无回归、无关键风险 | 应由可复核的证据或独立检查判定 |
+| 人工偏好 | 可读性、结果适用性 | 保留产物与量表，不能称为完全客观指标 |
 
-```text
-agent-evaluation/
-  SKILL.md
-  agents/
-    openai.yaml
-  references/
-    human-preference.md
-    metric-taxonomy.md
-    run-record-schema.md
-    task-suite-design.md
-  scripts/
-    record_human_score.py
-    score_runs.py
-    validate_skill.py
-```
+默认聚合为 `0.35 × quantitative + 0.45 × gates + 0.20 × human preference`。这是一组可配置默认值，不是经验证的普适效用函数。每次都应同时报告分项、样本量和关键失败；严重失败不得被平均分掩盖。
 
-## Install
+## 安装与使用
 
-Install this skill into Codex from GitHub:
-
-```bash
-python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo 222222222l/Agent-Evaluation-Skill \
-  --path agent-evaluation
-```
-
-On Windows, if `python` is not on `PATH`, use the Python runtime bundled with Codex:
-
-```powershell
-& "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" `
-  "C:\Users\Administrator\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" `
-  --repo 222222222l/Agent-Evaluation-Skill `
-  --path agent-evaluation
-```
-
-Restart Codex after installing new skills.
-
-## Use
-
-Ask Codex to use the skill:
+将 `agent-evaluation/` 安装至宿主支持的 Skill 目录，调用：
 
 ```text
-Use $agent-evaluation to design an evaluation framework for this coding agent.
+使用 $agent-evaluation 为这个任务型Agent制定任务集、运行记录、
+验收门槛与人工偏好量表，并说明聚合规则。
 ```
 
-Typical outputs include:
+输入为 JSON/JSONL 运行记录，核心字段为 `run_id`、`task_id`、`metrics`、`checks`、`human`。详细结构见 [运行记录契约](agent-evaluation/references/run-record-schema.md)；先按任务汇总重复运行，再汇总整个任务集。
 
-- task-suite design
-- run-record schema
-- exact metric definitions
-- gate and threshold definitions
-- human preference rubric
-- weighted scoring formula
-- validation and reporting plan
+## 命令
 
-## Run Record Format
-
-The scoring script accepts JSON or JSONL run records. A minimal record looks like:
-
-```json
-{
-  "run_id": "run-001",
-  "task_id": "task-001",
-  "metrics": {
-    "cost_usd": 0.42,
-    "input_tokens": 12000,
-    "output_tokens": 2400,
-    "reasoning_tokens": 8000,
-    "wall_time_s": 480,
-    "tool_calls": 18,
-    "retry_count": 1,
-    "test_pass_rate": 1.0,
-    "regression_count": 0
-  },
-  "checks": {
-    "verified_completion": true,
-    "tests_passed": true,
-    "acceptance_passed": true,
-    "context_grounded": true,
-    "no_critical_risk": true
-  },
-  "human": {
-    "preference_score": 4,
-    "max_score": 5
-  }
-}
-```
-
-## Score Runs
-
-Run the built-in smoke test:
+在仓库根目录：
 
 ```bash
 python agent-evaluation/scripts/score_runs.py --self-test
-```
-
-Score real runs:
-
-```bash
-python agent-evaluation/scripts/score_runs.py --runs path/to/runs --out summary.json
-```
-
-Print the default scoring configuration:
-
-```bash
 python agent-evaluation/scripts/score_runs.py --print-default-config > agent_eval_config.json
-```
-
-Use a customized scoring configuration:
-
-```bash
-python agent-evaluation/scripts/score_runs.py \
-  --runs path/to/runs \
-  --config agent_eval_config.json \
-  --out summary.json
-```
-
-## Record Human Scores
-
-Interactive review:
-
-```bash
-python agent-evaluation/scripts/record_human_score.py \
-  --artifact path/to/trace.md \
-  --run-id run-001 \
-  --task-id task-001 \
-  --out human_scores.jsonl
-```
-
-Non-interactive score recording:
-
-```bash
-python agent-evaluation/scripts/record_human_score.py \
-  --run-id run-001 \
-  --task-id task-001 \
-  --score 4 \
-  --max-score 5 \
-  --notes "Good result with minor verbosity." \
-  --out human_scores.jsonl
-```
-
-Merge human scores into final scoring:
-
-```bash
-python agent-evaluation/scripts/score_runs.py \
-  --runs path/to/runs \
-  --human-scores human_scores.jsonl
-```
-
-## Validate
-
-The skill includes a validation script that uses only the Python standard library:
-
-```bash
+python agent-evaluation/scripts/score_runs.py --runs path/to/runs --config agent_eval_config.json --out summary.json
+python agent-evaluation/scripts/record_human_score.py --artifact path/to/trace.md --run-id run-001 --task-id task-001 --out human_scores.jsonl
+python agent-evaluation/scripts/score_runs.py --runs path/to/runs --human-scores human_scores.jsonl
 python agent-evaluation/scripts/validate_skill.py agent-evaluation
 ```
 
-The helper compiles bundled scripts, checks required skill metadata, verifies referenced files, and validates the UI metadata file.
+人工分数也可用 `--score`、`--max-score`、`--notes` 非交互记录。结构检查与 self-test 不等于跨任务效度验证。
 
-## Design Notes
+## 方法与证据
 
-- Keep objective telemetry, threshold gates, and human preference scores separate until final aggregation.
-- Use fatal gates for severe failures such as data loss, security leakage, fabricated verification, or unsafe irreversible actions.
-- Aggregate by task before aggregating across the suite when tasks have repeated stochastic runs.
-- Always report component scores next to the final weighted score.
+- [SKILL.md](agent-evaluation/SKILL.md)
+- [任务集设计](agent-evaluation/references/task-suite-design.md)
+- [指标分类](agent-evaluation/references/metric-taxonomy.md)
+- [人工偏好](agent-evaluation/references/human-preference.md)
+
+比较 Agent 或 Skill 时，应固定任务/资源条件，重复随机运行，保留失败轨迹，并使用未参与调试的验收任务。没有这些证据，不能把评分提高解释为通用能力提高。
+
+本仓库当前未提供顶层 `LICENSE`。
