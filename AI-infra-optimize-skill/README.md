@@ -1,159 +1,51 @@
-# Optimize AI Infra
+# AI 基础设施性能诊断 Skill
 
-一个面向 Codex 的训练、推理与本地 AI 服务性能诊断 Skill。它先定位端到端瓶颈，再选择最低成本、可验证、可回滚的系统优化路径，而不是看到 GPU 使用率异常就直接编写自定义 Kernel。
+[English](README.en.md)
 
-The skill diagnoses end-to-end AI training, inference, and serving bottlenecks, then produces evidence-gated optimization advice or an execution plan for humans and infra-capable agents.
+> 这是 Cliff-skill 集合中的模块副本。以下相对路径与命令均以 `AI-infra-optimize-skill/` 为工作目录；历史来源见集合根目录的迁移清单。
 
-## 适用场景
+`optimize-ai-infra` 用于组织训练、推理与服务性能诊断：先建立可重复的端到端基线，再沿数据、CPU、传输、计算、通信与内存链路定位瓶颈，选择能通过实验区分的优化假设。
 
-- 训练 step、有效 tokens/s、MFU 或多卡扩展效率低于预期；
-- 推理 TTFT、ITL/TPOT、p95/p99 或吞吐异常；
-- OOM、显存持续增长、KV cache pressure 或 allocator fragmentation；
-- GPU 利用率波动、GPU 时间线空洞、大量短 Kernel；
-- 数据加载、CPU dispatch、传输、同步、编译或 graph break；
-- NCCL 暴露、rank 负载不均衡、存储或 checkpoint 阻塞；
-- 判断是否需要 `torch.compile`、量化、vLLM/SGLang、FSDP/ZeRO、Triton、TileLang、CUTLASS 或 CUDA 优化。
+交付物是诊断建议或执行计划，不是加速库。当前 Skill 的诊断/计划模式执行只读分析，不自动修改源码、配置或运行服务。
 
-## 设计原则
+## 适用问题
 
-1. **先诊断，后优化**：区分事实、推断和未知信息。
-2. **先系统，后 Kernel**：从 workload、service、host、runtime、graph、communication 和 memory 逐层下钻。
-3. **端到端收益优先**：使用 Amdahl 上界约束局部优化价值。
-4. **成熟方案优先**：优先验证现有编译器、运行时、Serving Engine 和融合库。
-5. **可验证、可回滚**：所有建议都需要基线、验收门槛、数值质量与停止条件；MFU 必须声明有效 FLOPs、实际工作量及硬件峰值口径。
-6. **不越权实施**：执行请求只生成只读分析与执行计划，不自动修改代码、配置或服务。
+训练 step、有效吞吐与多卡扩展；推理 TTFT、ITL/TPOT、p95/p99；OOM、KV 缓存与分配器；数据加载、编译/graph break、CPU dispatch、NCCL 暴露、慢 rank、存储及 checkpoint 阻塞。
 
-## 受众与输出模式
+优先验证成熟编译器、运行时和 serving 方案；只有关键路径证据支持时才进入算子或自定义 kernel。GPU 使用率本身不是瓶颈证据。
 
-| 受众 | 响应方式 |
-|---|---|
-| 技术小白 | 先用通俗语言解释，再给不超过三个成熟开源方案和低风险操作 |
-| 专业开发者 | 给出分层证据、可证伪假设、Profiler/Nsight 路径、数值与端到端验收标准 |
-| Infra Agent | 输出机器友好的 YAML 计划，包括阶段、候选命令、权限、产物、门槛、回滚和停止条件 |
+## 工作方式
 
-Skill 独立区分两种意图：
+1. 明确用户可见目标、工作负载、硬件和数值/质量约束。
+2. 记录稳定阶段基线，提出可证伪假设和最小区分实验。
+3. 用 Amdahl 上界约束局部优化价值。
+4. 规划端到端性能、显存、正确性和质量验收，以及停止/回滚条件。
 
-- **Advice mode**：解释问题、比较候选方案、给出下一项最小测量。
-- **Execution-plan mode**：对项目进行只读分析，生成可供 Agent 执行的优化框架与计划；本轮不实施变更。
+新手输出简明测量与候选方案；开发者输出 profiler 路径和验收口径；Agent 执行者可获得含权限、产物与门槛的 YAML 计划。详见 [SKILL.md](optimize-ai-infra/SKILL.md) 与 [参考资料](optimize-ai-infra/references/)。
 
-## 主动发现
+## 安装与使用
 
-`agents/openai.yaml` 显式启用了：
-
-```yaml
-policy:
-  allow_implicit_invocation: true
-```
-
-因此，Agent 在自主训练、推理、压测或部署过程中观察到下列信号时，可以在用户没有点名 Skill 的情况下主动选择它：
-
-- 稳态 step time、吞吐、延迟、显存或成本持续偏离基线；
-- OOM、near-OOM、KV cache preemption 或异常内存增长；
-- 有待执行工作时出现 Accelerator idle gap；
-- 并发或设备数增加后 p95/p99、吞吐或扩展效率恶化；
-- graph break、recompile、动态 shape churn 或大量短 Kernel；
-- 通信暴露、rank imbalance、checkpoint 或存储阻塞。
-
-单次冷启动、正常 warm-up/compile 或没有用户可见回归的瞬时利用率波动不会单独触发。
-
-> 隐式调用是模型与运行环境的语义路由，不是操作系统级事件钩子。需要每 N 步强制检查时，应在训练或服务运行时增加显式监控钩子。
-
-## 工作流
+将 `optimize-ai-infra/` 放入宿主支持的 Skill 目录，刷新其 Skill 索引。保留已有同名版本的备份，不盲目覆盖。
 
 ```text
-定义用户可见目标
-        ↓
-建立可重复基线
-        ↓
-定位 critical path
-        ↓
-提出可证伪假设
-        ↓
-最小区分实验
-        ↓
-成熟系统方案
-        ↓
-必要时进入算子 / Kernel
-        ↓
-数值、质量、内存与端到端验收
+使用 $optimize-ai-infra 诊断8卡DDP扩展效率，并给出最小测量与执行计划。
 ```
 
-## 安装
+`agents/openai.yaml` 允许宿主在持续性能回归时隐式选择本 Skill；这不是操作系统监控钩子，也不保证每 N 步触发。冷启动、正常预热或无用户影响的单次抖动不能独立证明回归。
 
-将 `optimize-ai-infra` 目录复制到 Codex 的个人 Skill 目录：
+## 验证工具
 
-```powershell
-git clone https://github.com/222222222l/AI-infra-optimize-skill.git
-cd AI-infra-optimize-skill
+在仓库根目录：
 
-$destination = Join-Path $env:USERPROFILE '.codex\skills\optimize-ai-infra'
-New-Item -ItemType Directory -Path $destination -Force | Out-Null
-Copy-Item -Path '.\optimize-ai-infra\*' -Destination $destination -Recurse -Force
+```bash
+python optimize-ai-infra/scripts/validate_skill.py optimize-ai-infra
+python optimize-ai-infra/scripts/estimate_impact.py --share 0.25 --speedup 2 --current-time-ms 100
 ```
 
-新建 Codex 任务或重启 Codex，使 Skill 目录刷新。
+结构校验仅检查包与引用完整性；Amdahl 结果是条件估算。性能声明仍需相同任务、精度、批次、并发和硬件下的实测，不能把微基准或单一有利 shape 外推为普遍收益。量化、低精度与卸载的质量代价须单列。
 
-## 使用示例
+本仓库没有给出跨工作负载通用加速率，当前未提供顶层 `LICENSE`。
 
-显式调用：
+## 集合版本的训练MFU扩展
 
-```text
-Use $optimize-ai-infra to diagnose why my 8-GPU DDP training scales poorly.
-```
-
-```text
-使用 $optimize-ai-infra 分析本地 vLLM 服务在并发 8 时 TTFT p95 恶化的问题，只给出执行计划。
-```
-
-不显式调用也可以触发：例如 Agent 在自主训练中发现 warm step time 翻倍、GPU 持续空闲且任务可能超出时间预算。
-
-## 仓库结构
-
-```text
-AI-infra-optimize-skill/
-├── README.md
-└── optimize-ai-infra/
-    ├── SKILL.md
-    ├── agents/
-    │   └── openai.yaml
-    ├── references/
-    │   ├── diagnostic-framework.md
-    │   ├── novice-guidance.md
-    │   ├── expert-guidance.md
-    │   ├── agent-execution-contract.md
-    │   ├── profiling-playbooks.md
-    │   └── training-mfu-playbook.md
-    └── scripts/
-        ├── estimate_impact.py
-        └── validate_skill.py
-```
-
-`SKILL.md` 只负责触发、路由和主流程；详细知识按受众与任务类型渐进加载。训练 MFU 专项流程见 `references/training-mfu-playbook.md`：覆盖真实有效 FLOPs 核算、预声明完整窗口、microbatch/GAS 搜索、冻结编码器与数据重叠、GC/多卡慢 rank、FP8 缓存以及失败优化的拒绝条件。
-
-## 验证
-
-校验 Skill 结构、命名、隐式调用配置、引用完整性和 UI 元数据：
-
-```powershell
-python .\optimize-ai-infra\scripts\validate_skill.py .\optimize-ai-infra
-```
-
-估算某个局部优化的 Amdahl 端到端收益上界：
-
-```powershell
-python .\optimize-ai-infra\scripts\estimate_impact.py `
-  --share 0.25 `
-  --speedup 2 `
-  --current-time-ms 100
-```
-
-估算结果不是性能声明，仍需使用代表性 workload 做端到端 benchmark。
-
-## 安全边界
-
-- 不把 `nvidia-smi` 利用率当成瓶颈结论；
-- 不在没有等价语义基线时比较融合与非融合实现；
-- 不隐藏量化、低精度、offload 或小模型带来的质量代价；
-- 不在单个有利 shape 上宣称普遍加速；
-- 不把微基准提升当作端到端提升；
-- 不在诊断或计划请求中擅自安装依赖、修改源码、重启服务或运行生产压测。
+[training-mfu-playbook.md](optimize-ai-infra/references/training-mfu-playbook.md) 补充有效FLOPs与硬件峰值口径、预先声明的完整测量窗口、microbatch/梯度累加搜索、冻结编码器与数据重叠、GC/慢rank及FP8缓存的验证路径。MFU必须随工作量、精度、峰值定义和计时窗口一起报告；它不是单独的质量或成本收益指标。该扩展不表示独立仓库包含相同版本。
