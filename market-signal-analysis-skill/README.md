@@ -1,164 +1,53 @@
-# Market Signal Analysis Skill
+# 市场信号分析 Skill
 
-A Codex skill for causal, probability-aware analysis of stocks, ETFs, sectors, indices, and liquid macro markets.
+[English](README.en.md)
 
-It combines technical structure, fundamentals, breadth, valuation, liquidity, policy, actor incentives, cycles, event risk, and data-quality checks without forcing every question through every framework.
+> 这是 Cliff-skill 集合中的模块副本。以下相对路径与命令均以 `market-signal-analysis-skill/` 为工作目录；历史来源见集合根目录的迁移清单。
 
-## Design
+`market-signal-analysis` 是面向股票、ETF、行业、指数与流动性宏观市场的分析方法包。它把价格结构、基本面、资金、政策、参与者激励与数据质量放入同一决策框架，并按问题加载必要模块。
 
-The skill uses a progressive-disclosure architecture:
+交付物包括 Agent 指令、专题参考和确定性计算脚本。它不是经样本外验证的交易策略；模型给出的情景权重不等于实际胜率。
 
-1. `SKILL.md` contains only first principles, the common workflow, module routing, composition rules, and the minimum output contract.
-2. `references/` contains specialized frameworks loaded only when the question needs them.
-3. `scripts/` contains deterministic analysis and architecture-validation helpers.
+## 方法与覆盖
 
-The default rule is one primary module plus no more than two overlays. Extra modules should be loaded only when they can change the decision, probability, or risk boundary.
+默认选择一个主模块及最多两个辅助模块。先固定市场、决策期限、数据版本与风险约束，再比较支持/反对证据和退出条件。
 
-## Core Principles
+| 模块 | 内容 |
+| --- | --- |
+| 价格与趋势 | OHLCV、动量、波动、广度、多时间尺度、ATR风险边界 |
+| ETF与拥挤 | 份额/净申赎估计、同类聚合、A股承接与退出、港股多柜台去重 |
+| 企业与行业 | 盈利、现金流、估值、治理、供给和高估值叙事 |
+| 宏观与政策 | 美国流动性、利率/财政、跨资产传导、主体激励与制度约束 |
+| 周期与事件 | 库存/信用/capex周期、频域探索、交割/议息/调样 |
+| 行动比较 | 成本、风险预算、退出失败、损失路径、条件性收益假设 |
+| 数据审计 | 同口径、复权、发布滞后、历史版本与独立旁证 |
 
-- Fix the market and decision horizon before choosing signals.
-- Gate conclusions on data source, freshness, adjustment status, and sample length.
-- Separate state, flow, and expectation.
-- Build a causal transmission chain before relying on correlations or historical analogies.
-- Compare actors' words with costly, repeated, observable actions.
-- Deduplicate correlated evidence and condition probabilities on base rates and regimes.
-- Label probabilities as empirical, model-implied, or scenario weights.
-- Give paths, ranges, time windows, and invalidation conditions instead of unsupported point targets.
-- State the strongest opposing case and what evidence would falsify the preferred view.
+相关性、频域峰值和回归权重均不能独立证明因果或可交易性。数值概率须标明经验、模型隐含或主观情景来源；没有足量样本则保持定性。详见 [SKILL.md](SKILL.md) 和 [专题目录](references/)。
 
-## Coverage
+## 安装与使用
 
-- OHLCV, trend, breakout, momentum, volume, MACD, RSI, KDJ, divergence, volatility, and multi-timeframe structure.
-- Market-stage-specific behavior selection across crypto, A-shares, and U.S. equities, with risk-budget filtering, executable exits, regime-matched return priors, all-in costs, failure/ruin paths, and survival-adjusted log growth.
-- Granville and Vegas rules, trend-stage classification, ATR/Chandelier risk levels, reversal and reclaim/retest signals.
-- Sector breadth, leadership, rotation, crowding, high-valuation narrative bubbles, and exhaustion risk.
-- A-share broad-ETF peer aggregation, creation/redemption monitoring, support-withdrawal risk, ETF migration, and index-versus-breadth divergence.
-- Sector-ETF share trends, flow pressure, capacity, concentration, crowding/unwind scores, and Bayesian up/range/down scenario weights.
-- Hong Kong ETF canonical-fund flows, multi-counter deduplication, Southbound ETF Connect, market-maker inventory, NAV-timing, and cross-border Bayesian scenarios.
-- Single-stock fundamentals, valuation, announcement/news quality, governance, capital supply, and technical boundaries.
-- Official-data decomposition, measurement-bias ranges, revisions, and independent cross-checks.
-- Policy-maker and market-decision-maker incentives, direct/indirect games, and Nash-like equilibrium analysis.
-- Economic, credit, liquidity, inventory, capex, industry, and market-cycle overlays.
-- Rolling Fourier/FFT rhythm, HP/BK pre-filtering, endpoint-safe detrending, cycle stability, noise energy, and frequency-domain correlation.
-- U.S. liquidity, Fed policy, Treasury issuance, term premium, reserve plumbing, macro stress, and cross-asset transmission.
-- Futures/options expiry, FOMC and macro releases, Treasury auctions, index rebalances, and thin-liquidity dates.
-- Optional Transformer/TFT market-model and publishable research design.
-
-## Installation
-
-```powershell
-git clone https://github.com/222222222l/market-signal-analysis-skill.git $env:USERPROFILE\.codex\skills\market-signal-analysis-skill
-```
-
-To update an existing clone:
-
-```powershell
-git -C $env:USERPROFILE\.codex\skills\market-signal-analysis-skill pull
-```
-
-Reload Codex skills if the environment does not discover changes automatically.
-
-## Usage Examples
+将本仓库包含 `SKILL.md` 的根目录安装到宿主支持的 Skill 目录，调用：
 
 ```text
-Use market-signal-analysis to determine whether this ETF is in a healthy pullback or a formal trend break.
+使用 $market-signal-analysis 判断该ETF的回调是否改变原假设，
+核对数据时间与口径，并给出反证、风险边界和下一验证点。
 ```
 
-```text
-Analyze whether this high-valuation sector is expensive but strengthening or expensive and weakening.
-```
+确定性 ETF 脚本接受长表：
+`date,symbol,group,scope,close,nav,shares,turnover`。港股数据应先把多个交易柜台规范为同一基金/份额类别，使用 `--market hk`。
 
-```text
-Classify U.S. liquidity and Fed policy, then map the result into Nasdaq, Treasuries, USD, and gold scenarios.
-```
-
-```text
-Verify the official employment data, model policy and market actors' best responses, and identify the likely equilibrium.
-```
-
-```text
-Classify this market's current stage, compare eligible behavior modes, and estimate the net return range after costs, exit failures, and ruin risk.
-```
-
-For deterministic A-share ETF flow analysis, provide daily long-form data with
-`date,symbol,group,scope,close,nav,shares,turnover`. Optional breadth,
-concentration, capacity, valuation, fundamental, policy, derivatives, and
-cross-market fields improve coverage.
-
-```powershell
+```bash
 python scripts/analyze_etf_flows.py --input etf_daily.csv --scope broad --group csi300 --regime range_extraction --pretty
-```
-
-For Hong Kong-listed ETFs, add `--market hk` and normalize multiple trading
-counters into one canonical fund/share-class row before analysis.
-
-The script aggregates peer products by estimated money flow, not raw shares,
-and labels its Bayesian output as model-implied scenario weights rather than
-historical hit probabilities.
-
-For behavior-mode selection, provide market-state probabilities, horizon-matched
-return priors, costs, exit/ruin paths, and explicit risk limits:
-
-```powershell
 python scripts/recommend_behavior_mode.py --input behavior_priors.json --pretty
-```
-
-The calculator rejects modes that violate the risk budget and withholds a
-numeric return when a material state prior has fewer than 20 effective events.
-
-## Repository Layout
-
-```text
-.
-|-- SKILL.md                         # compact router and invariants
-|-- agents/
-|   `-- openai.yaml                 # Codex UI metadata
-|-- references/
-|   |-- signal-taxonomy.md
-|   |-- statistical-weighting.md
-|   |-- market-profiles.md
-|   |-- output-format.md
-|   |-- behavior-mode-selection.md
-|   |-- trend-stage-analysis.md
-|   |-- sector-bubble-analysis.md
-|   |-- a-share-macro-trading-model.md
-|   |-- a-share-broad-etf-monitoring.md
-|   |-- a-share-sector-etf-crowding.md
-|   |-- hong-kong-etf-flow-monitoring.md
-|   |-- single-stock-fundamental-technical-analysis.md
-|   |-- official-data-verification.md
-|   |-- actor-optimal-path-analysis.md
-|   |-- cycle-overlay-analysis.md
-|   |-- fourier-cycle-analysis.md
-|   |-- us-macro-liquidity-fed-policy.md
-|   |-- macro-stress-derivative-analysis.md
-|   |-- special-date-event-risk.md
-|   |-- deep-learning-extension.md
-|   `-- research-and-optimization-roadmap.md
-`-- scripts/
-    |-- analyze_ohlcv.py
-    |-- analyze_etf_flows.py
-    |-- recommend_behavior_mode.py
-    |-- train_market_transformer_demo.py
-    `-- validate_skill_graph.py
-```
-
-## Validation
-
-Run the architecture check after modifying routes or references:
-
-```powershell
 python scripts/validate_skill_graph.py
 ```
 
-Run the Codex skill validator when available:
+ETF 同类聚合采用估计资金流，不直接相加原始份额。行为比较器需要期限匹配的收益先验、成本和退出/破产路径；重要状态先验少于20个有效事件时不输出数值收益。这个最低门槛本身不保证估计稳健。
 
-```powershell
-python C:\Users\Administrator\.codex\skills\.system\skill-creator\scripts\quick_validate.py .
-```
+## 证据边界
 
-The architecture validator enforces a compact `SKILL.md`, verifies that every specialized reference is routed directly from it, and catches broken or orphaned references.
+验证脚本检查路由、引用与包结构，不证明投资绩效。正式研究应保留点时数据，处理复权、幸存者偏差、成本、重叠样本和多重试验，并区分开发集与样本外测试。
 
-## Disclaimer
+方法细节见 [统计权重](references/statistical-weighting.md)、[官方数据核验](references/official-data-verification.md)、[行为选择](references/behavior-mode-selection.md) 和 [研究路线](references/research-and-optimization-roadmap.md)。可选 Transformer 演示只是研究入口。
 
-This skill provides uncertain market analysis and decision support, not guaranteed returns or personalized financial advice. Validate current data, liquidity, costs, tax constraints, and risk capacity before acting.
+本仓库当前未提供顶层 `LICENSE`。任何资产行动仍需当前数据和适用的个人约束，文档不提供收益保证。
