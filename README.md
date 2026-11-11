@@ -2,7 +2,7 @@
 
 [English](README.en.md)
 
-面向AI助手的分析与工程方法集合，包含市场/政策分析、Agent评估、性能诊断、项目状态同步和因果决策建模。各模块由指令、参考资料及部分确定性脚本组成；它们是方法与工具，不构成已验证的通用能力提升或预测收益。
+面向AI助手的分析与工程方法集合，包含市场/政策分析、Agent评估、性能诊断、约束驱动工程决策、项目状态同步和因果决策建模。各模块由指令、参考资料及部分确定性脚本组成；它们是方法与工具，不构成已验证的通用能力提升或预测收益。
 
 ## 模块
 
@@ -12,6 +12,7 @@
 | [中国政策](China-policy-analysis-skill/README.md) | 执行约束、资金/风险传导、数据一致性和因果识别 |
 | [Agent评估](Agent-Evaluation-Skill/README.md) | 遥测、验收门槛、人工偏好与透明聚合 |
 | [AI性能诊断](AI-infra-optimize-skill/README.md) | 训练/推理关键路径、MFU口径和最小验证 |
+| [约束驱动工程思维](constraint-driven-engineering-skill/README.md) | 业务目标、真实约束、跨行业机制迁移、反证实验与复用沉淀 |
 | [项目同步](sync-project-state-skill/README.md) | Git项目检查点、环境差异和跨设备交接 |
 | [因果与决策](model-causes-and-decisions-skill/README.md) | 反事实、识别、竞争解释和决策规则 |
 

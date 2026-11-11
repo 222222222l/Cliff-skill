@@ -1,0 +1,4 @@
+interface:
+  display_name: "约束驱动工程思维"
+  short_description: "用于真实业务的工程约束分析、跨领域方案发散、反证实验与持续复盘"
+  default_prompt: "使用 $constraint-driven-engineering 分析这个工程问题，找出真实约束、跨行业可迁移机制，并设计最小反证实验。"

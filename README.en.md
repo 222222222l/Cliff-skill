@@ -2,7 +2,7 @@
 
 [中文](README.md)
 
-A collection of analysis and engineering methods for AI assistants: market/policy analysis, Agent evaluation, performance diagnosis, project-state synchronization, and causal decision modeling. Modules contain instructions, references, and selected deterministic scripts. They are methods/tools, not established general capability gains or predictive returns.
+A collection of analysis and engineering methods for AI assistants: market/policy analysis, Agent evaluation, performance diagnosis, constraint-driven engineering decisions, project-state synchronization, and causal decision modeling. Modules contain instructions, references, and selected deterministic scripts. They are methods/tools, not established general capability gains or predictive returns.
 
 ## Modules
 
@@ -12,6 +12,7 @@ A collection of analysis and engineering methods for AI assistants: market/polic
 | [China policy](China-policy-analysis-skill/README.en.md) | Implementation constraints, funding/risk transmission, consistency, causal identification |
 | [Agent evaluation](Agent-Evaluation-Skill/README.en.md) | Telemetry, gates, human preferences, transparent aggregation |
 | [AI performance](AI-infra-optimize-skill/README.en.md) | Training/inference critical paths, MFU definitions, minimal experiments |
+| [Constraint-driven engineering](constraint-driven-engineering-skill/README.en.md) | Outcomes, binding constraints, cross-domain transfer, falsifiable experiments, reusable systems |
 | [Project state](sync-project-state-skill/README.en.md) | Git checkpoints, environment differences, cross-device handoffs |
 | [Causes/decisions](model-causes-and-decisions-skill/README.en.md) | Counterfactuals, identification, rival hypotheses, decision rules |
 
